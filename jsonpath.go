@@ -759,9 +759,9 @@ func isNumber(o interface{}) bool {
 
 func cmp_any(obj1, obj2 interface{}, op string) (bool, error) {
 	switch op {
-	case "<", "<=", "==", ">=", ">":
+	case "<", "<=", "==", "!=", ">=", ">":
 	default:
-		return false, fmt.Errorf("op should only be <, <=, ==, >= and >")
+		return false, fmt.Errorf("op should only be <, <=, ==,!=, >= and >")
 	}
 
 	var exp string
