@@ -196,6 +196,13 @@ func Test_jsonpath_JsonPathLookup_1(t *testing.T) {
 			t.Errorf("title are wrong: %v", res)
 		}
 	}
+
+	// filter
+	res, err = JsonPathLookup(json_data, "$[?(@.expensive == 10)]")
+	t.Log(err, res)
+	if len(res.([]interface{})) != 1 {
+		t.Error("filter root value failed")
+	}
 }
 
 func Test_jsonpath_JsonPathLookup_structs_1(t *testing.T) {
