@@ -556,27 +556,20 @@ func get_filtered(obj, root interface{}, filter string) ([]interface{}, error) {
 			if err != nil {
 				return nil, err
 			}
-
-			for _, kv := range reflect.ValueOf(obj).MapKeys() {
-				tmp := reflect.ValueOf(obj).MapIndex(kv).Interface()
-				ok, err := eval_reg_filter(tmp, root, lp, pat)
-				if err != nil {
-					return nil, err
-				}
-				if ok == true {
-					res = append(res, tmp)
-				}
+			ok, err := eval_reg_filter(obj, root, lp, pat)
+			if err != nil {
+				return nil, err
+			}
+			if ok == true {
+				res = append(res, obj)
 			}
 		} else {
-			for _, kv := range reflect.ValueOf(obj).MapKeys() {
-				tmp := reflect.ValueOf(obj).MapIndex(kv).Interface()
-				ok, err := eval_filter(tmp, root, lp, op, rp)
-				if err != nil {
-					return nil, err
-				}
-				if ok == true {
-					res = append(res, tmp)
-				}
+			ok, err := eval_filter(obj, root, lp, op, rp)
+			if err != nil {
+				return nil, err
+			}
+			if ok == true {
+				res = append(res, obj)
 			}
 		}
 	default:
