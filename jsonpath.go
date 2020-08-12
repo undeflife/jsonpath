@@ -128,15 +128,15 @@ func (c *Compiled) Lookup(obj interface{}) (interface{}, error) {
 				return nil, fmt.Errorf("range args length should be 2")
 			}
 		case "filter":
-			obj, err = get_key(obj, s.key)
-			if err != nil {
-				return nil, err
-			}
 			if s.key != "" {
 				obj, err = get_key(obj, s.key)
 				if err != nil {
 					return nil, err
 				}
+			}
+			obj, err = get_filtered(obj, root, s.args.(string))
+			if err != nil {
+				return nil, err
 			}
 		default:
 			return nil, fmt.Errorf("expression don't support in filter")
