@@ -549,7 +549,7 @@ func get_filtered(obj, root interface{}, filter string) ([]interface{}, error) {
 			}
 		}
 		return res, nil
-	case reflect.Map:
+	case reflect.Map, reflect.Struct:
 		if op == "=~" {
 			// regexp
 			pat, err := regFilterCompile(rp)
